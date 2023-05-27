@@ -8,12 +8,16 @@ contract Artist is Ownable{
     string internal artistName;
 
     constructor (string memory _initName){
-        renameArtist(_initName);
+        _renameArtist(_initName);
     }
 
     event RenameArtist(string indexed oldName, string indexed newName, address indexed byAddress);
 
     function renameArtist(string memory _newName) public virtual onlyOwner{
+        // logic check _newName is empty
+        _renameArtist(_newName);
+    }
+    function _renameArtist(string memory _newName) internal virtual{
         string memory oldName = _artistName();
         artistName = _newName;
         emit RenameArtist(oldName, _newName, _msgSender());
