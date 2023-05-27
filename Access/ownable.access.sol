@@ -8,11 +8,16 @@ abstract contract Ownable is Context{
 
     event OwnershipTransferred(address indexed previousOwner, address indexed newOwner);
     event OwnershipRenounced(address indexed owner, string indexed reason);
-    
+
     constructor (){
         _transferOwnership(_msgSender());
     }
 
+    function transferOwnership(address newOwner) public virtual onlyOwner {
+        require(newOwner != address(0), "Ownable: new owner is the zero address");
+        _transferOwnership(newOwner);
+    }
+    
     function renounceOwnership(string memory _reason) public virtual onlyOwner {
         address oldOwner = _owner;
         _transferOwnership(address(0));
