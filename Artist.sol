@@ -6,7 +6,6 @@ contract Artist is Ownable{
     string public version = '0.1.0';
     // init vars
     string internal artistName;
-
     constructor (string memory _initName){
         _renameArtist(_initName);
     }
